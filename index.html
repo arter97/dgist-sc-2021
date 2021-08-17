@@ -26,6 +26,12 @@
     <link href="assets/css/theme.css" rel="stylesheet" />
 
     <style>
+      #schedule a{
+        color: inherit;
+      }
+      .anchored>.card{
+        background-color: yellow;
+      }
       .border-primary .badge{
         background-color: #3c4f7a;
       }
@@ -302,6 +308,29 @@
     <script src="assets/js/theme.js"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800&amp;display=swap" rel="stylesheet">
+
+    <script>
+      for(const $ of document.querySelectorAll("a")){
+        const href = $.getAttribute('href');
+
+        if(!href.startsWith("#")){
+          continue;
+        }
+        const $target = document.querySelector(href);
+        let timer;
+
+        $.addEventListener('click', () => {
+          if(timer){
+            return;
+          }
+          timer = window.setTimeout(() => {
+            $target.classList.remove("anchored");
+            timer = null;
+          }, 500);
+          $target.classList.add("anchored");
+        });
+      }
+    </script>
   </body>
 
 </html>
